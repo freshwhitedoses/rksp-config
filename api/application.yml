@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Включение автоматической маршрутизации через Eureka
+          lower-case-service-id: true
+      routes:
+        - id: startup
+          uri: lb://startup  # Убедитесь, что сервис зарегистрирован в Eureka
+          predicates:
+            - Path=/analyst/feedback/**
+            - Path=/investor/feedback/**
+            - Path=/startup/**
+            - Path=/startups/**
+            - Path=/team/feedback/**
+          filters:
+            - name: Logging
+        - id: team
+          uri: lb://team  # Убедитесь, что сервис зарегистрирован в Eureka
+          predicates:
+            - Path=/teams_by_user/**
+            - Path=/team/**
+            - Path=/teams_by_user_id/**
+          filters:
+            - name: Logging
+      enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak.keycloak:80/realms/startups/protocol/openid-connect/certs
+  #  cloud:
+  #    config:
+  #      discovery:
+  #        enabled: true
+  #        service-id: config
+  #      # Stop the application if can't connect to config service
+  #      fail-fast: true
+  # Configuring Eureka client, at this moment it's necessary to show where Eureka is located
+  logging:
+    level:
+      org.springframework.cloud.gateway: DEBUG

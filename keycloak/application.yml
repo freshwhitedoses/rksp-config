@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+keycloak:
+  server-url: http://keycloak.keycloak:80/
+  auth-realm: master
+  client-id: admin-cli
+  username: admin
+  password: admin
+  realm: startups

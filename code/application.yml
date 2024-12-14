@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  mail:
+    host: smtp.yandex.ru
+    username: freshwhitedoses@yandex.ru
+    password: selcuxkiusvhcqga
+    properties:
+      mail:
+        smtp:
+          port: 465
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+        transport:
+          protocol: smtp
