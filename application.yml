@@ -1,26 +1,3 @@
 # Application-wide properties
 server:
   port: 8080
-
-spring:
-  # Set the name of application
-  application:
-    name: config
-
-  profiles:
-    active: native
-  # Let's look for configurations in a classpath
-  cloud:
-    config:
-      server:
-        native:
-          search-locations:
-            - classpath:/shared
-
-# Configuring Eureka client, at this moment it's necessary to show where Eureka is located
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://eureka-service.helm-deployments:8080/eureka
